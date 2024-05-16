@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="euc-kr">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form 배우기</title>
+</head>
+<body>
+    <h1>입력폼 만들기</h1>
+    <label>아이디</label>
+    <input type = "text">
+    <br>
+    <label>비밀번호</label>
+    <input type = "password">
+    <br>
+    <input type = "button" value = "로그인">
+    <h1>선택박스 만들기</h1>
+    <p>과목을 선택하세요</p>
+    <input type = "radio" name = "과목" value = "국어">국어
+    <input type = "radio" name = "과목" value = "영어">영어
+    <input type = "radio" name = "과목" value = "수학">수학
+    <p>과일을 선택하세요</p>
+    <input type = "radio" name = "과일" value = "option1">수박
+    <input type = "radio" name = "과일" value = "option2">딸기
+    <input type = "radio" name = "과일" value = "option3">오렌지
+    <p>멀티초이스 입력폼 만들기</p>
+    <input type = "checkbox" name = "음식" value = "food1">김밥
+    <input type = "checkbox" name = "음식" value = "food2">돈가스
+    <input type = "checkbox" name = "음식" value = "food3">떡볶이
+    <p>풀다운 메뉴 만들기</p>
+    <select>
+        <option>코카콜라</option>
+        <option>펩시</option>
+        <option>펩시제로</option>
+    </select>
+    <p>
+    <select size = "2">
+        <option>코카콜라</option>
+        <option>펩시</option>
+        <option>펩시제로</option>
+    </select>
+    </p>
+    <p>풀다운 메뉴 만들기 - 멀티 셀렉트</p>
+    <!-- 멀티 선택은 컨트롤 키를 누르고 여러개 클릭-->
+    <select size = "2" multiple>
+        <option>코카콜라</option>
+        <option>펩시</option>
+        <option>펩시제로</option>
+    </select>
+    <h1>프로그래스바</h1>
+    <progress value = "40" max = "100"></progress>40%
+    <br>
+    <progress value = "60" max = "100"></progress>60%
+    <br>
+    <progress value = "100" max = "100"></progress>100%
+</body>
+</html>
