@@ -1,0 +1,13 @@
+#dog1{
+    border: 10px;
+    color: red;
+    margin: 150px;
+}
+#dog2{
+    margin-right:50px;
+}
+.container{
+    /* solid, dashed, dotted 등의 다양한 옵션들 */
+    border: 3px dotted red;
+    width: 80%;
+}

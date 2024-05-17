@@ -1,0 +1,24 @@
+h1,h2 {
+    text-align: center;
+}
+#calender{
+    width: 100%;
+    border: 10x solid;
+    height: 200px
+}
+
+#calender th{
+    background-color:azure;
+}
+
+#calender td{
+    text-align: center;
+}
+
+#calender th:first-child, #calender td:first-child{
+    color: red;
+}
+
+#calender th:last-child, #calender td:last-child{
+    color:blue;
+} 

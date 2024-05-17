@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="euc-kr">
+    <title>다양한 CSS 효과(Transition)</title>
+    <style>
+        .square{
+            width:100px;
+            height:100px;
+            background-color: red;
+            transition-property: width, height;
+            transition-duration: 1.0s;
+            transition-timing-function: ease; /*부드러운 옵션*/
+        }
+        .square:hover{
+            width: 150px;
+            height: 150px;
+        }
+        .button{
+            color:black;
+            transition-property: color;
+            transition-duration: 0.5s;
+            transition-timing-function: ease-out;
+        }
+        .button:hover{
+            color:red;
+        }
+        .image{
+            width:200px;
+            height: 200px;
+            transition-property: transform;
+            transition-duration: 1s;
+            transition-timing-function: ease;
+        }
+        .image:hover{
+            transform: rotate(180deg);
+        }
+        .gradient{
+            background: linear-gradient(to right, #ff0000, #00ff00);
+            transition-property: background;
+            transition-duration: 1s;
+            transition-timing-function: ease;
+        }
+        .gradient:hover{
+            background: linear-gradient(to right, #00ff00,#ff0000);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="square"></div>
+    <br>
+    <button class="button">Hover me</button>
+    <br>
+    <img src="C:/sesac/class/1.html/images/dog2.jpg" class="image">
+    <br>
+    <div class="gradient">마우스를 올리면 색상이 변경됩니다.</div>
+</body>
+</html>
