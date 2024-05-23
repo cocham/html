@@ -1,5 +1,5 @@
 #-*- coding: euc-kr-*-
-
+#한글 깨짐 수정
 def fibo(num):
     a,b = 1,1
     n = a+b
