@@ -16,7 +16,7 @@ class Datagenerator_store:
         for _ in range(self.numbers):
             id = str(uuid.uuid4())
             s = self.store_gen.store_generate()
-            store = s[0]+' '+s[1]+str(s[2])+'È£Á¡'
+            store = s[0]+' '+s[1]+str(s[2])+'??'
             type = s[0]
             adds = self.address_gen.addressgenerate()
             a_store = (id,store,type,adds)
