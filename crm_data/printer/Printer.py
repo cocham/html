@@ -3,12 +3,12 @@ import csv
 
 class Printer:
     def print_to_screen(d_type,d_list):
-        if d_type.lower() in ["user","store","item","order","orderitem"]:
+        if d_type in ["user","store","item","order","orderitem"]:
             for d in d_list:
                 print(d)
                 
     def print_to_file(d_type,d_list):
-        if d_type.lower() == "user":
+        if d_type == "user":
             with open('output_user.csv','w',encoding = 'euc-kr',newline='') as file:
                         fwriter = csv.writer(file)
                         headers = ["id", "name", "gender", "age", "birthday","address"]
@@ -16,7 +16,7 @@ class Printer:
                         for x in d_list:
                             fwriter.writerows(x)    
 
-        elif d_type.lower() == "store":
+        elif d_type == "store":
             with open('output_store.csv','w',encoding = 'euc-kr',newline='') as file:
                         fwriter = csv.writer(file)
                         headers = ["id", "name", "gender", "age", "birthday","address"]
@@ -24,7 +24,7 @@ class Printer:
                         for x in d_list:
                             fwriter.writerows(x)    
 
-        elif d_type.lower() == "item":
+        elif d_type == "item":
             with open('output_item.csv','w',encoding = 'euc-kr',newline='') as file:
                         fwriter = csv.writer(file)
                         headers = ["id", "name", "gender", "age", "birthday","address"]
@@ -32,7 +32,7 @@ class Printer:
                         for x in d_list:
                             fwriter.writerows(x)
 
-        elif d_type.lower() == "order":
+        elif d_type == "order":
             with open('output_order.csv','w',encoding = 'euc-kr',newline='') as file:
                 fwriter = csv.writer(file)
                 headers = ['Id','OrderAt','StoreId','UserId']
@@ -40,7 +40,7 @@ class Printer:
                 for x in d_list:
                     fwriter.writerows(x)
 
-        elif d_type.lower() == "orderitem":
+        elif d_type == "orderitem":
             with open('output_orderitem.csv','w',encoding = 'euc-kr',newline='') as file:
                 fwriter = csv.writer(file)
                 headers = ['Id','OrderId','ItemId']
