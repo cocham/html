@@ -39,39 +39,43 @@ def generate_oi(numbers):
     return l
 
 
-if __name__ == "__main__":
-    try:
-        menu = input("[생성할 데이터(user | store | item | order | orderitem), 개수, 출력 방식]을 입력하세요(공백으로 구분)\n[출력 방식 옵션: 스크린/파일]\n")
-        d_type = menu.split()[0].lower()
-        if d_type not in ["user","store","item","order","orderitem"]:
-            raise ValueError("데이터가 올바르지 않습니다.")
-        n = menu.split()[1]
-        if not int(n) or int(n) <= 0:
-            raise IndexError("올바른 숫자가 아닙니다.") 
-        show = menu.split()[2]
-        if show not in ["스크린","파일"]:
-            raise ValueError("올바른 출력방식이 아닙니다.")
-        s = Printer
-        if d_type.lower() == "user":
-            ans = generate_u(int(n))
+if __name__ == "__main__":  
+            while True:
+                menu = input("[생성할 데이터(user | store | item | order | orderitem), 개수, 출력 방식]을 입력하세요(공백으로 구분)\n[출력 방식 옵션: 스크린/파일]\n종료를 원하면 1을 입력하세요.\n")
+                if menu == "1":
+                    print("종료합니다")
+                    break
+                try:
+                    d_type = menu.split()[0].lower()
+                    if d_type not in ["user","store","item","order","orderitem"]:
+                        raise ValueError("데이터가 올바르지 않습니다.")
+                    n = menu.split()[1]
+                    if not int(n) or int(n) <= 0:
+                        raise IndexError("올바른 숫자가 아닙니다.") 
+                    show = menu.split()[2]
+                    if show not in ["스크린","파일"]:
+                        raise ValueError("올바른 출력방식이 아닙니다.")
+                    s = Printer
+                    if d_type.lower() == "user":
+                        ans = generate_u(int(n))
 
-        elif d_type.lower() == "store":
-            ans = generate_s(int(n))
-        
-        elif d_type.lower() == "item":
-            ans = generate_i(int(n))
+                    elif d_type.lower() == "store":
+                        ans = generate_s(int(n))
+                    
+                    elif d_type.lower() == "item":
+                        ans = generate_i(int(n))
 
-        elif d_type.lower() == "order":
-            ans = generate_o(int(n))
+                    elif d_type.lower() == "order":
+                        ans = generate_o(int(n))
 
-        elif d_type.lower() == "orderitem":
-            ans = generate_oi(int(n))
+                    elif d_type.lower() == "orderitem":
+                        ans = generate_oi(int(n))
 
-        if show == "스크린":
-                s.print_to_screen(d_type,ans)
-        elif show == "파일":
-                s.print_to_file(d_type,[ans])
-    except ValueError as e:
-        print(e,"형식에 맞게 입력하세요")
-    except IndexError as e:
-        print(e,"형식에 맞게 입력하세요")
+                    if show == "스크린":
+                            s.print_to_screen(d_type,ans)
+                    elif show == "파일":
+                            s.print_to_file(d_type,[ans])
+                except ValueError as e:
+                    print(e,"형식에 맞게 입력하세요")
+                except IndexError as e:
+                    print(e,"형식에 맞게 입력하세요")
