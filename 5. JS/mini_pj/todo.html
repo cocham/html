@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #todo-list li {
+            list-style: none;
+            margin-bottom: 5px;
+        }
+        .checked {
+            text-decoration: line-through;
+        }
+        .delete-btn{
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>To Do List</h1>
+    <input id='input' type="text" placeholder="할 일을 작성하시오">
+    <button id="add-todo">추가</button>
+    <button id="delete-todo">전체 삭제</button>
+    <div> 
+        <ul id="todo-list"></ul>
+    </div>
+</body>
+<script>    
+    const todoItems = []; //전역 변수 선언(∵ add-todo의 click이벤트에서 생성하면 클릭할 때마다 리스트가 계속 초기화됨)
+    document.getElementById('add-todo').addEventListener('click',addTodo);
+    document.getElementById('input').addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) {
+            addTodo();
+        }
+    });
+
+    function addTodo() {
+        const newTodo = document.getElementById('input').value.trim();
+        
+        //공백 입력 방지
+        if(newTodo === ''){
+            alert('할 일을 입력하세요.')
+            return;
+        }
+
+        //중복 입력 방지
+        if(todoItems.includes(newTodo)) {
+            alert('이미 목록에 있습니다. 다시 입력하세요');
+            document.getElementById('input').value = '';
+            return;
+        } 
+        todoItems.push(newTodo);
+
+        const todoList = document.getElementById('todo-list'); //할 일 목록의 부모태그(ul)
+        const newItem = document.createElement('li'); //할 일 목록(li)
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+
+        const button = document.createElement('button'); //할 일 삭제(li)
+        button.innerText = 'x';
+        button.classList.add('delete-btn');
+        button.addEventListener('click',deleteTextNode); 
+
+        const textNode = document.createTextNode(newTodo); 
+        newItem.appendChild(checkbox);
+        newItem.appendChild(textNode);
+        newItem.appendChild(button);
+
+        todoList.appendChild(newItem);
+        document.getElementById('input').value = '';
+        
+        /* 체크박스에서 체크하면 checked라는 classList로 checked라는 클래스를 생성해서 
+        밑줄 치는 기능을 추가함. classList로 remove사용가능 */
+        checkbox.addEventListener('click',function(){
+            if (checkbox.checked){
+                newItem.classList.add('checked');
+                } else  {
+                newItem.classList.remove('checked');
+                }
+            });
+
+    }
+    
+    // x버튼을 눌렀을 때 버튼의 부모 요소인 <li>태그 삭제
+    function deleteTextNode() {
+        const listItem = this.parentNode;
+        listItem.remove();
+    }
+
+    // 전체 삭제
+    document.getElementById('delete-todo').addEventListener('click',deleteAll)
+    document.addEventListener('keydown',function(event) {
+        if (event.key === "Delete" || evenet.key === "Del") {
+            deleteAll();
+        }
+    })
+
+    function deleteAll() {
+        const todo = document.getElementById('todo-list');
+        //li태그를 순회하면서 삭제함.
+        while (todo.firstChild) {
+            todo.removeChild(todo.firstChild);
+        }
+    }
+</script>
+</html>
