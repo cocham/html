@@ -63,9 +63,9 @@
         button.addEventListener('click',deleteTextNode); 
 
         const textNode = document.createTextNode(newTodo); 
-        newItem.appendChild(checkbox);
-        newItem.appendChild(textNode);
-        newItem.appendChild(button);
+        newItem.appendChild(checkbox); //childNodes[0]
+        newItem.appendChild(textNode); //childNodes[1]
+        newItem.appendChild(button);   //childNodes[2]
 
         todoList.appendChild(newItem);
         document.getElementById('input').value = '';
@@ -85,7 +85,15 @@
     // x버튼을 눌렀을 때 버튼의 부모 요소인 <li>태그 삭제
     function deleteTextNode() {
         const listItem = this.parentNode;
-        listItem.remove();
+        const textNode = listItem.childNodes[1].textContent; // 삭제할 텍스트 노드
+
+        // 해당 텍스트 노드를 todoItems 배열에서 제거
+        const index = todoItems.indexOf(textNode);
+        if (index !== -1) {
+            todoItems.splice(index, 1);
+        }
+
+    listItem.remove();
     }
 
     // 전체 삭제
@@ -102,6 +110,8 @@
         while (todo.firstChild) {
             todo.removeChild(todo.firstChild);
         }
+        //목록 요소 담아둔 리스트 초기화
+        todoItems.length = 0;
     }
 </script>
 </html>
