@@ -13,8 +13,10 @@
 <body>
     <div id="contentContainer">
         <h1>Random Dog Breed Image</h1>
-        <label>Choose a Breed:</label>
+        <label>Choose a main Breed:</label>
         <select id="selectBreed"></select>
+        <label>Choose a sub-Breed</label>
+        <select id="selectSubBreed"></select>
         <button id="fetchImage">Fetch Image</button>
     </div>
     <div id="showDog">
@@ -44,12 +46,49 @@
                         console.error(`Request failed: ${error.message}`);
                     }) 
             }
-        window.onload = fetchDoglist;
-
-        function fetchDogImage() {
+        
+        function fetchSubdoglist () {
             const selectBox = document.getElementById('selectBreed')
             const breed = selectBox.options[selectBox.selectedIndex].textContent;
-            fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
+            const selectSubBox = document.getElementById('selectSubBreed')
+            selectSubBox.innerHTML = ''
+
+            fetch(`https://dog.ceo/api/breed/${breed}/list` )
+                .then(response => {
+                    if (!response.ok) { 
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                    return response.json();
+                })
+                .then(data => {  
+                    const subBreeds = data.message
+                    if (subBreeds.length === 0){
+                        const option = document.createElement('option')
+                        option.value = ''
+                        option.textContent = 'None'
+                        selectSubBox.appendChild(option)
+                    }
+                    else {
+                        subBreeds.forEach(subbreed => {
+                            const option = document.createElement('option')
+                            option.value = subbreed
+                            option.textContent = subbreed
+                            selectSubBox.appendChild(option)
+                        })
+                    }
+        
+                })
+                .catch(function(error) {
+                        console.error(`Request failed: ${error.message}`);
+                    }) 
+            }
+
+        function fetchDogImage() {
+            const breed = document.getElementById('selectBreed').value;
+            const subBreed = document.getElementById('selectSubBreed').value;
+            const url = subBreed ? `https://dog.ceo/api/breed/${breed}/${subBreed}/images/random` : `https://dog.ceo/api/breed/${breed}/images/random`
+            
+            fetch(url)
                 .then(response => {
                         if (!response.ok) { 
                                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -64,10 +103,12 @@
                         console.error(`Request failed: ${error.message}`);
                     }) 
                 
-        }   
-            
+        } 
+        
+        fetchDoglist();
         document.getElementById('fetchImage').addEventListener('click',fetchDogImage)
-
+        document.getElementById('selectBreed').addEventListener('change',fetchSubdoglist)
+        
     </script>
 
 </body>
