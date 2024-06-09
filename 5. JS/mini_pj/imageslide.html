@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 10px;
+            position: relative;
+        }
+        .asap img {
+            width: 500px;
+            display: block;
+            margin: auto;
+            height: auto;
+            transition: transform 0.2s; /*translateX(100%)에서 translateX(0)으로 갈 때 0.2초 소요*/
+        }
+        .button {
+            width: 300px;
+            transform: translateX(30%);
+            margin-bottom: -30px;
+            position: absolute;
+            bottom: 0;
+            padding-bottom: 5px;
+        }
+
+        .button button{
+            cursor: pointer;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="button">
+        <button id="previous">Previous</button>
+        <button id="next">Next</button>
+    </div>
+    <div class="asap">
+        <img src="https://assets.gqindia.com/photos/60f3b95cbc55a78132763d4b/master/w_1600%2Cc_limit/16072021_ASAP_09.jpg">
+    </div>
+    <script>
+        let index = 0;
+        const images = ["https://assets.gqindia.com/photos/60f3b95cbc55a78132763d4b/master/w_1600%2Cc_limit/16072021_ASAP_09.jpg",
+                        "https://assets.gqindia.com/photos/60f3b96319900248e3af9e70/master/w_1600%2Cc_limit/gettyimages-644295220.jpg",
+                        "https://assets.gqindia.com/photos/60f3b95919900248e3af9e6e/master/w_1600%2Cc_limit/16072021_ASAP_014.jpg"
+                        ]
+
+        document.getElementById('previous').addEventListener('click',function() {
+            index = (index === 0) ? 0: index - 1;
+            document.querySelector('.asap img').style.transform = "translateX(-100%)"; //현재 이미지가 오른쪽으로 이동
+            setTimeout(() => {
+                document.querySelector('.asap img').src = images[index];
+                document.querySelector('.asap img').style.transform = "translateX(0)"; //새로운 이미지 생성
+            }, 200); // 0.2s 지연후에 새로운 이미지가 보임
+        })
+
+        document.getElementById('next').addEventListener('click',function() {
+            index = (index === 2) ? 2: index + 1;
+            document.querySelector('.asap img').style.transform = "translateX(100%)"; 
+            setTimeout(() => {
+                document.querySelector('.asap img').src = images[index];
+                document.querySelector('.asap img').style.transform = "translateX(0)"; 
+            }, 200); 
+        })
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #showDog {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="contentContainer">
+        <h1>Random Dog Breed Image</h1>
+        <label>Choose a Breed:</label>
+        <select id="selectBreed"></select>
+        <button id="fetchImage">Fetch Image</button>
+    </div>
+    <div id="showDog">
+        <img id="dog" src="">
+    </div>
+    <script>
+        function fetchDoglist() {
+            fetch('https://dog.ceo/api/breeds/list/all' )
+                .then(response => {
+                    if (!response.ok) { 
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                    return response.json();
+                })
+                .then(data => {                    
+                    const breeds = Object.keys(data.message)
+                    const select = document.getElementById('selectBreed')
+                    
+                    breeds.forEach(breed => {
+                        const option = document.createElement('option')
+                        option.value = breed
+                        option.textContent = breed
+                        select.appendChild(option)
+                    }) 
+                })
+                .catch(function(error) {
+                        console.error(`Request failed: ${error.message}`);
+                    }) 
+            }
+        window.onload = fetchDoglist;
+
+        function fetchDogImage() {
+            const selectBox = document.getElementById('selectBreed')
+            const breed = selectBox.options[selectBox.selectedIndex].textContent;
+            fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
+                .then(response => {
+                        if (!response.ok) { 
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                        return response.json();
+                    })
+                .then(data => {
+                    document.getElementById('dog').src = data.message
+
+                })
+                .catch(function(error) {
+                        console.error(`Request failed: ${error.message}`);
+                    }) 
+                
+        }   
+            
+        document.getElementById('fetchImage').addEventListener('click',fetchDogImage)
+
+    </script>
+
+</body>
+</html>
