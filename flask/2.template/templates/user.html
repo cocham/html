@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>사용자 html 파일 생성</h1>
+    <!-- jinja2 Template 문법 => HTML 내부에서 파이썬 코드를 쓸 수 있게 해주는 문법 -->
+    <h2>안녕하세요 {{username}} 님</h2>
+    {% if username == 'admin' %}
+    <h2>관리자 로그인!! </h2>
+    {% endif %}
+    <ol>
+        {% for user in content %}
+            {% if user == 'bill' %}
+                <li><strong> {{user}} </strong></li>
+            {% else %}
+                <li> {{user}} </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+</body>
+</html>
