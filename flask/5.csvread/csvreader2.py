@@ -16,11 +16,10 @@ def load_csv_data(filename):
             clean_row = {fieldname.strip():value.strip() for fieldname,value in row.items()} #양쪽 공백 제거해서 키값으로 넣어줌
             csv_data.append(clean_row)
 
-def paginate_data(page_number, per_page):
-    #페이지에 들어갈 항목의 처음과 끝 인덱스 계산
+def paginate_data(page_number, per_page,data_list):
     start_index = (page_number - 1) * per_page
     end_index = start_index + per_page
-    return csv_data[start_index:end_index]
+    return data_list[start_index:end_index]
 
 @app.route('/')
 @app.route('/<int:page>')
@@ -32,7 +31,7 @@ def index(page=1):
     total_pages = len(csv_data) // per_page + (1 if len(csv_data) % per_page > 0 else 0)
     
     # 현재 페이지에 해당하는 데이터 추출
-    current_data = paginate_data(page,per_page)
+    current_data = paginate_data(page,per_page,csv_data)
     
     # 템플릿 렌더링(index2.html안의 변수에 flask 변수 전달)
     return render_template('index2.html', headers=headers, users=current_data, total_pages=total_pages)
@@ -42,8 +41,10 @@ def get_user_by_name():
     search_name = request.args.get('name')
     get_user = [x for x in csv_data if x['Name'] == search_name]
 
-    per_page = 10
+    per_page = 5
     total_pages = len(get_user) // per_page + (1 if len(get_user) % per_page > 0 else 0)
+    page = request.args.get('page',default=1,type=int)
+    current_data = paginate_data(page,per_page,get_user)
     return render_template('index2.html',headers=headers,users=get_user,total_pages=total_pages)
 
 if __name__ == "__main__":
