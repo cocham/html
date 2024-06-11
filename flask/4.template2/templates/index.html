@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            color: orange;
+        }
+        .myform {
+            margin-bottom: 20px;
+        }
+        .myform input {
+            width: 80px;
+            height: 20px;
+        }
+        .myform input[type="submit"] {
+            width: 50px;
+            height: 30px;
+            border: none;
+            border-radius: 10px;
+            background-color: orange;
+            cursor: pointer;
+        }
+        .myform input[type="submit"]:hover {
+            background-color: #ffba6b;
+        }
+        #myphone {
+            width: 155px;
+        }
+        .mytable {
+            width: 400px;
+            border: 1px solid #ffba6b;
+            margin-top: 20px;
+        }
+        .myheader {
+            background-color: orange;
+        }
+        th, td {
+            border: 1px solid #ffba6b;
+        }
+        tr:hover {
+            background-color: #ffe1be;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>헬로우 플라스크</h1>
+    <!-- 검색창 추가하기 -->
+
+    <form action="/user" method="GET" class="myform">
+        <input type="text" name="name" placeholder="이름을 입력하시오"> 
+        <input type="number" name="age" placeholder="나이를 입력하시오">
+        <input type="submit" value="검색">
+    </form>
+
+    <!-- 이 검색을 제공해주는 기능을 백엔드(플라스크)에서 만드시오 -->
+
+    <!-- 테이블 아래 사용자 정보 추가하기 -->
+    <!-- 테이블 헤더 추가 name,age,phone -->
+    <!-- 테이블 행에 각 사용자 정보 추가 -->
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Phone</th>
+        </tr>
+        {% for u in users %}
+            <tr>
+                {% for v in u.values() %}
+                    <td>{{ v }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
