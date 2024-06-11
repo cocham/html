@@ -18,7 +18,7 @@ def search():
     name_query = request.args.get('name')
     age_query = request.args.get('age')
     phone_query = request.args.get('phone')
-    result = []
+    result = users
     
     '''
     page = request.args.get('page',default=1,type=int)
