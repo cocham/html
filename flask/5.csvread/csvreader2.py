@@ -45,7 +45,7 @@ def get_user_by_name():
     total_pages = len(get_user) // per_page + (1 if len(get_user) % per_page > 0 else 0)
     page = request.args.get('page',default=1,type=int)
     current_data = paginate_data(page,per_page,get_user)
-    return render_template('index2.html',headers=headers,users=get_user,total_pages=total_pages)
+    return render_template('index2.html',headers=headers,users=current_data,total_pages=total_pages)
 
 if __name__ == "__main__":
     load_csv_data('./data.csv')
