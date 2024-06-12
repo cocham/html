@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>홈페이지</title>
+{% endblock %}
+
+{% block menu %}
+<li>밥</li>
+<li>잠</li>
+{% endblock %}
+
+{% block content %}
+<!-- 개별 페이지의 내용을 담는곳 -->
+<h2>개별 페이지 내용</h2>
+<p>개별 페이지 내용입니다</p>
+<img src="{{ url_for('static',filename='img/python.png')}}">
+{% endblock %}
