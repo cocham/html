@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .user-row {
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+    <form action="/" method="GET">
+        <input type="text" name="name" value = "{{ search_name }}" placeholder="사용자 이름 검색">
+        <input type="submit" value="검색">
+        <label for="per_page">페이지당 항목 수: </label>
+        <select name="per_page" onchange="this.form.submit()">
+            {% for num in [5,10,15,20] %}
+                <option value="{{ num }}"{% if per_page == num %} selected {% endif %}>{{ num }}</option>
+            {% endfor %}    
+        </select>
+    </form>
+    
+    <!-- for 문을 돌면서 아래 users 를 반복하며, 한줄한줄 테이블을 그린다. -->
+    <table border="1">
+        <!-- 헤더 처리 -->
+        <tr>
+        {% for header in headers %}
+            {% if header != 'id' and header != 'address' %}
+                <th> {{ header }} </th>
+            {% endif %}
+        {% endfor %}
+        </tr>
+
+        <!-- 유저 처리(data.csv를 한 행씩 반복)-->
+        {% for user in users %}
+            <tr class="user-row" onclick="window.location='/user/{{ user.id }}';" > 
+                <!-- for 루프로 처리하기(Id,Name,Gender,Age,Birthday) -->
+                <td>{{ loop.index + start_index }}</td>
+                {% for fieldname, value in user.items() %}
+                    {% if fieldname != 'id' and fieldname != 'address' %}
+                        <td> {{ value }} </td> 
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+    </table>
+
+    <!-- 페이지 번호 출력 range범위만큼 page_num이 생성됨 => 라우트에 전달-->
+        {% for page_num in range(1, total_pages + 1) %}
+            <a href="?page={{ page_num }}&per_page={{per_page}}&name={{search_name}}">{{ page_num }}</a>
+        {% endfor %}
+</body>
+</html>
