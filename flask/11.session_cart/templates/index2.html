@@ -4,48 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .card-container {
-        display: flex;
-        gap: 20px; /*카드 간 간격 조절 */ 
-        width:50rem;
-    }
+    <link rel="stylesheet" href="./static/css/index.css">
 
-    .card {
-        width: 500px;
-        margin-bottom: 20px; /* 카드 아래 여백 */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-        transition: transform 0.2s ease; /* 호버 효과 */
-        text-align: center;
-    }
-
-    .card:hover {
-        transform: translateY(-5px); /* 호버 시 약간 떠오르는 효과 */
-    }
-
-    .card img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-    }
-
-    .card-title {
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .card-text {
-        font-size: 1rem;
-        color: #6c757d;
-        margin-bottom: 1rem;
-    }
-
-    .btn-primary:hover {
-        background-color: #cad6e2;
-        border-color: #0062cc;
-    }
-
-    </style>
 </head>
 <body>
     <button onclick="window.location='/login';">로그인</button>
@@ -57,12 +17,13 @@
                 <img src="{{url_for('static',filename='images/'+ item_info['image'])}}" width="100px" class="card-img-top">
                 <h5 class="card-title">{{item_info['name'] }}</h5>
                 <p class="card-text">{{item_info['price']}}원</p>
-                <a href="{{url_for('cart',item_name=item_name)}}" class="btn btn-primary">카트에 추가</a>
+                {% if session['user'] %}
+                    <a href="{{url_for('cart',item_name=item_name)}}" class="btn btn-primary">카트에 추가</a>
+                {% elif not session['user'] %}
+                    <a href='#'></a>
+                {% endif %}    
             </div>        
         {% endfor %}
     </div>
-
-
-    <a href="{{url_for('view_cart')}}">장바구니 보기</a>
 </body>
 </html>

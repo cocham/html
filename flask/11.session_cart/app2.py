@@ -13,14 +13,14 @@ users = [
 ]
 
 #상품 DB
-items = {'item1':{'name':'상품1','price':1000,'image':'item1.jpg'},
-        'item2':{'name':'상품2','price':2000,'image':'item2.jpg'},
-        'item3':{'name':'상품3','price':3000,'image':'item3.jpg'}
+items = {'item1':{'name':'제주 말차 라떼','price':6100,'image':'item1.jpg'},
+        'item2':{'name':'망고 패션 티 블렌디드','price':5400,'image':'item2.jpg'},
+        'item3':{'name':'화이트 초콜릿 모카','price':5900,'image':'item3.jpg'}
         }
 
 @app.route('/')
 def main():
-    return render_template('index2.html',items=items)
+    return render_template('index2.html',items=items,session=session)
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -55,9 +55,8 @@ def cart():
         if item_info:
             session['user']['cart'][item_name] = 1
     session.modified = True
-    print(session)
-
-    return render_template('user_index.html',user=user,items=items)
+    cart_count = sum(session['user']['cart'].values())
+    return render_template('user_index.html',user=user,items=items,cart_count = cart_count)
 
 @app.route('/view-cart')
 def view_cart():

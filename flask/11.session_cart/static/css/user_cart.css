@@ -1,0 +1,50 @@
+.card-container {
+display: flex;
+gap: 20px; /*카드 간 간격 조절 */ 
+width:50rem;
+margin-top: 50px;
+}
+
+.card {
+width: 500px;
+margin-bottom: 20px; /* 카드 아래 여백 */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+transition: transform 0.2s ease; /* 호버 효과 */
+text-align: center;
+}
+
+.card:hover {
+transform: translateY(-5px); /* 호버 시 약간 떠오르는 효과 */
+}
+
+.card img {
+width: 100%;
+height: auto;
+object-fit: cover;
+}
+
+.card-title {
+font-size: 1.25rem;
+margin-bottom: 0.5rem;
+}
+
+.card-text {
+font-size: 1rem;
+color: #6c757d;
+margin-bottom: 1rem;
+}
+
+.btn-primary:hover {
+background-color: #cad6e2;
+border-color: #0062cc;
+}
+
+.show {
+display: flex;
+justify-content: space-between;
+align-items: center; /*수직 정렬을 위해 요소들을 가운데 정렬 */
+width: 100%; /* 필요에 따라 가로 너비 설정 */
+height: 100px; /* 필요에 따라 세로 높이 설정 */
+background-color: #f0f0f0; /* 배경색 설정 */
+}
+
